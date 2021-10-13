@@ -7,10 +7,13 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "eslint": "^8.0.0"
+    "eslint": "^8.0.0",
+    "babel-jest": "^24.4.0",
+    "jest": "^24.3.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest src --watch",
+    "test:e2e": "jest ./__test__ --runInBand"
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,12 @@
   },
   "author": "Enrico Piovesan",
   "license": "ISC",
+  "jest": {
+    "verbose": false,
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js",
+    "testEnvironment": "./jest-mongo.js"
+  },
   "bugs": {
     "url": "https://github.com/enricopiovesan/agents-microservice/issues"
   },
