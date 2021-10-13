@@ -1,5 +1,5 @@
 import Id from '../Id'
-import buildMakeAgent from './comment'
+import buildMakeAgent from './agent'
 
 function md5 (text) {
     return crypto
