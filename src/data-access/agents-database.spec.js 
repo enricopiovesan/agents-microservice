@@ -1,0 +1,54 @@
+import makeDatabase from '../../__test__/fixtures/db'
+import makeAgentsDatabase from './agents-database'
+import makeFakeAgent from '../../__test__/fixtures/agent'
+
+describe('agents db', () => {
+  let agentsDatabase
+
+  beforeEach(async () => {
+    agentsDatabase = makeAgentsDatabase({ makeDatabase })
+  })
+
+  it('lists agents', async () => {
+    const inserts = await Promise.all(
+      [makeFakeAgent(), makeFakeAgent(), makeFakeAgent()].map(
+        agentsDatabase.insert
+      )
+    )
+    const found = await agentsDatabase.findAll()
+    expect.assertions(inserts.length)
+    return inserts.forEach(insert => expect(found).toContainEqual(insert))
+  })
+
+  it('inserts an agent', async () => {
+    const agent = makeFakeAgent()
+    const result = await agentsDatabase.insert(agent)
+    return expect(result).toEqual(agent)
+  })
+
+  it('finds an agent by id', async () => {
+    const agent = makeFakeAgent()
+    await agentsDatabase.insert(agent)
+    const found = await agentsDatabase.findById(agent)
+    expect(found).toEqual(agent)
+  })
+
+  it("finds an agent by it's hash", async () => {
+    const fakeAgentOne = makeFakeAgent()
+    const fakeAgentTwo = makeFakeAgent()
+    const insertedOne = await agentsDatabase.insert(fakeAgentOne)
+    const insertedTwo = await agentsDatabase.insert(fakeAgentTwo)
+
+    expect(await agentsDatabase.findByHash(fakeAgentOne)).toEqual(insertedOne)
+    expect(await agentsDatabase.findByHash(fakeAgentTwo)).toEqual(insertedTwo)
+  })
+
+  it('updates an agent', async () => {
+    const agent = makeFakeAgent()
+    await agentsDatabase.insert(agent)
+    agent.text = 'changed'
+    const updated = await agentsDatabase.update(agent)
+    return expect(updated.text).toBe('changed')
+  })
+
+})
