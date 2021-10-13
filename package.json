@@ -4,14 +4,26 @@
   "description": "Just a simple Node.js microservice",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "babel-plugin-inline-dotenv": "^1.2.2",
+    "body-parser": "^1.18.3"
   },
   "devDependencies": {
     "eslint": "^8.0.0",
     "babel-jest": "^24.4.0",
-    "jest": "^24.3.1"
+    "jest": "^24.3.1",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4"
   },
   "scripts": {
+    "build": "npm run clean && babel src -d dist",
+    "now-build": "npm run build",
+    "clean": "rimraf dist",
+    "db": "babel-node ./db/index.js",
+    "dev": "nodemon --exec babel-node ./src/index.js",
+    "start": "npm run clean && npm run build && npm run db && cd dist && node index.js",
     "test": "jest src --watch",
     "test:e2e": "jest ./__test__ --runInBand"
   },
