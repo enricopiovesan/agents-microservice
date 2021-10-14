@@ -4,9 +4,11 @@
   "description": "Just a simple Node.js microservice",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1",
     "babel-plugin-inline-dotenv": "^1.2.2",
-    "body-parser": "^1.18.3"
+    "body-parser": "^1.18.3",
+    "cuid": "^2.1.8",
+    "express": "^4.17.1",
+    "mongodb": "^3.1.13"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -23,7 +25,9 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^24.3.1",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "mongodb-memory-server": "^4.0.2",
+    "nodemon": "^1.18.10"
   },
   "scripts": {
     "build": "npm run clean && babel src -d dist",

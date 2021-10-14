@@ -3,7 +3,7 @@ export default function makeListAgents({ agentsDatabase }) {
         if (!companyId) {
             throw new Error('You must supply a company id.')
         }
-        const agents = await agentsDatabase.findByPostId({
+        const agents = await agentsDatabase.findByCompanyId({
             companyId
         })
         return agents
