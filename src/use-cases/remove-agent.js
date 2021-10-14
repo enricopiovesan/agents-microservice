@@ -36,6 +36,7 @@ export default function makeRemoveAgent({ agentsDatabase }) {
 
     async function softDelete(agentInfo) {
         const toDelete = makeAgent(agentInfo)
+        // the use case in this case doesn't need to know about the implementation of markDeleted
         toDelete.markDeleted()
         await agentsDatabase.update({
             id: toDelete.getId(),
