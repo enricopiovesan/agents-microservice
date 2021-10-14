@@ -18,18 +18,17 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.post(`${apiRoot}/agents`, makeCallback(createAgent))
-app.delete(`${apiRoot}/agents/:id`, makeCallback(deleteAgent))
-app.delete(`${apiRoot}/agents`, makeCallback(deleteAgent))
-app.patch(`${apiRoot}/agents/:id`, makeCallback(editAgent))
-app.patch(`${apiRoot}/agents`, makeCallback(editAgent))
-app.get(`${apiRoot}/agents`, makeCallback(getAgents))
+//  app.delete(`${apiRoot}/agents/:id`, makeCallback(deleteAgent))
+//  app.delete(`${apiRoot}/agents`, makeCallback(deleteAgent))
+//  app.patch(`${apiRoot}/agents/:id`, makeCallback(editAgent))
+//  app.patch(`${apiRoot}/agents`, makeCallback(editAgent))
 
 // API
 
 const router = express.Router();
 router.get(`/agent`, makeCallback(getAgent))
 router.get(`/agents`, makeCallback(getAgents))
+router.post(`/agents`, makeCallback(createAgent))
 
 app.use(`/${apiRoot}`, router)
 app.use(makeCallback(notFound))
