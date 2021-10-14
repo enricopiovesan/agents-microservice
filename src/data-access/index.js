@@ -6,7 +6,7 @@ const url = process.env.AGENTS_DATABASE_URL
 const dbName = process.env.AGENTS_DATABASE_NAME
 const client = new MongoClient(url, { useNewUrlParser: true })
 
-export async function makeDatabase () {
+export async function makeDatabase() {
   if (!client.isConnected()) {
     await client.connect()
   }

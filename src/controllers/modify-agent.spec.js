@@ -1,10 +1,10 @@
-import makeEditAgent from './edit-agent'
+import makeModifyAgent from './modify-agent'
 import makeFakeAgent from '../../__test__/fixtures/agent'
 
 describe('edit agent controller', () => {
   it('successfully edite an agent', async () => {
     const fakeAgent = makeFakeAgent()
-    const editAgent = makeEditAgent({ editAgent: a => a })
+    const editAgent = makeModifyAgent({ editAgent: agent => agent })
     const request = {
       headers: {
         'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ describe('edit agent controller', () => {
   })
   it('reports user errors', async () => {
     const fakeAgent = makeFakeAgent()
-    const editAgent = makeEditAgent({
+    const editAgent = makeModifyAgent({
       editAgent: () => {
         throw Error('Agent not modify')
       }
@@ -46,7 +46,7 @@ describe('edit agent controller', () => {
         'Content-Type': 'application/json'
       },
       statusCode: 400,
-      body: { error: 'Agent not modify'}
+      body: { error: 'Agent not modify' }
     }
     const actual = await editAgent(request)
     expect(actual).toEqual(expected)

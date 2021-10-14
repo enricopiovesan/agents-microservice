@@ -57,18 +57,18 @@ describe('agent', () => {
   })
   it('can be marked deleted', () => {
     const fake = makeFakeAgent()
-    const c = makeAgent(fake)
-    c.markDeleted()
-    expect(c.isDeleted()).toBe(true)
-    expect(c.getText()).toBe('.xX This agent has been deleted Xx.')
-    expect(c.getAuthor()).toBe('deleted')
+    const a = makeAgent(fake)
+    a.markDeleted()
+    expect(a.isDeleted()).toBe(true)
+    expect(a.getDescription()).toBe('.xX This agent has been deleted Xx.')
+    expect(a.getName()).toBe('deleted')
   })
   it('includes a hash', () => {
     const fakeAgent = {
-        name: 'Enrico Piovesan',
-        description: "I'm Iron man.",
-        postId: 'ABCD123',
-        active: true
+      name: 'Enrico Piovesan',
+      description: "I'm Iron man.",
+      postId: 'ABCD123',
+      active: true
     }
     expect(makeAgent(fakeAgent).getHash()).toBe(
       'da75260ce9e447e3ed757ee39229c7ca'
