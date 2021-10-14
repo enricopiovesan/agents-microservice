@@ -1,3 +1,6 @@
+// this is just an adaptor for express requests
+// express is depending on the adaptor a not the other way around
+
 module.exports = function makeExpressCallback(controller) {
     return (req, res) => {
         const httpRequest = {

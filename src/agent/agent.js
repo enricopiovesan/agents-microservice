@@ -1,4 +1,7 @@
+// do NOT import or require any dependecy
+
 export default function buildMakeAgent({ Id, md5, }) {
+  // this function returns an instace of agent
   return function makeAgent({
     name,
     createdOn = Date.now(),
@@ -10,6 +13,8 @@ export default function buildMakeAgent({ Id, md5, }) {
     enabled = true,
     description
   } = {}) {
+
+    // validation is very easy to read and you have all the business rules in one place
     if (!Id.isValidId(id)) {
       throw new Error('Agent must have a valid id.')
     }
@@ -28,6 +33,9 @@ export default function buildMakeAgent({ Id, md5, }) {
 
     const deletedDescription = '.xX This agent has been deleted Xx.'
     let hash
+
+    // the consumer of this fuction are alow to just read the propeties but not modify it
+    // it will impossible to have this obj in an invalid state
 
     return Object.freeze({
       getName: () => name,

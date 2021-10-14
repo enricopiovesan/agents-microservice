@@ -1,4 +1,3 @@
-
 export default function makeCreateAgent({ addAgent }) {
   return async function createAgent(httpRequest) {
     try {
